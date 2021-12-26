@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
-import logo from "../../images/SE-removebg-preview.png";
-import logo1 from "../../images/SAHOUANE_ENGINE-removebg-preview.png";
+// import logo from "../../images/SE-removebg-preview.png";
+import logo1 from "../../../images/SAHOUANE_ENGINE-removebg-preview.png";
 
 const Header = () => {
   return (
@@ -10,7 +10,7 @@ const Header = () => {
       burgerColorHover="#ffeb3b"
       logo={logo1}
       logoWidth="20vmax"
-      navColor1="rgb(57 62 70 / 69%)"
+      navColor1="rgb(57 62 70 / 89%)"
       logoHoverSize="10px"
       logoHoverColor="#FAD02C"
       link1Text="Home"
