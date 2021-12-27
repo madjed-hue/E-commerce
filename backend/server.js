@@ -1,6 +1,9 @@
 const app = require("./app");
 const dotEnv = require("dotenv");
+const cors = require("cors");
 const connectDatabase = require("../backend/config/database");
+
+// app.use(cors({ "Access-Control-Allow-Origin": "*" }, { mode: "no-cors" }));
 
 // Handling uncaught exception
 process.on("uncaughtException", (err) => {
