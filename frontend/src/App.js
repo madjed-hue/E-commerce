@@ -8,8 +8,11 @@ import Home from "./component/Home/Home.js";
 import ProductDetails from "./component/Product/ProductDetails.js";
 import Products from "./component/Product/Products.js";
 import Search from "./component/Product/Search.js";
+import LoginSignUp from "./component/user/LoginSignUp.js";
+// import { useSelector } from "react-redux";
 
 function App() {
+  // const { isAuthenticated, user } = useSelector((state) => state.user);
   React.useEffect(() => {
     webFont.load({
       google: {
@@ -20,12 +23,14 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
+
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/product/:id" exact element={<ProductDetails />} />
         <Route path="/products" exact element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" exact element={<Search />} />
+        <Route path="/login" exact element={<LoginSignUp />} />
       </Routes>
       <Footer />
     </BrowserRouter>

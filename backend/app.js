@@ -2,9 +2,13 @@ const express = require("express");
 const app = express();
 const errorMiddleWear = require("./middlewear/error");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 //Routes product Import
 const product = require("./routes/productRoute");
 //Routes User Import
