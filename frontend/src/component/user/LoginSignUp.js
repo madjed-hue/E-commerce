@@ -15,8 +15,6 @@ const LoginSignUp = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  //   const { loading } = useSelector((state) => state.user);
-
   const loginTab = useRef(null);
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
@@ -27,7 +25,6 @@ const LoginSignUp = () => {
   const loginSubmit = (e) => {
     e.preventDefault();
     dispatch(login(loginEmail, loginPassword));
-    // console.log("login form submited");
   };
   const [avatar, setAvatar] = useState("/Profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
