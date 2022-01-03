@@ -1,21 +1,24 @@
 import React from "react";
 import "./App.css";
-import Header from "./component/layout/Header/Header.js";
+import Header from "./component/layout/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import webFont from "webfontloader";
 import Footer from "./component/layout/Footer/Footer";
-import Home from "./component/Home/Home.js";
-import ProductDetails from "./component/Product/ProductDetails.js";
-import Products from "./component/Product/Products.js";
-import Search from "./component/Product/Search.js";
-import LoginSignUp from "./component/user/LoginSignUp.js";
+import Home from "./component/Home/Home";
+import ProductDetails from "./component/Product/ProductDetails";
+import Products from "./component/Product/Products";
+import Search from "./component/Product/Search";
+import LoginSignUp from "./component/user/LoginSignUp";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
-import UserOptions from "./component/layout/Header/UserOptions.js";
+import UserOptions from "./component/layout/Header/UserOptions";
 import { useSelector } from "react-redux";
-import Profile from "./component/user/Profile.js";
+import Profile from "./component/user/Profile";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
-import UpdateProfile from "./component/user/UpdateProfile.js";
+import UpdateProfile from "./component/user/UpdateProfile";
+import UpdatedPassword from "./component/user/UpdatedPassword";
+import ForgotPassword from "./component/user/ForgotPassword";
+import ResetPassword from "./component/user/ResetPassword";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -40,7 +43,14 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route exact path="/account" element={<Profile />} />
           <Route path="/me/update" exact element={<UpdateProfile />} />
+          <Route path="/password/update" exact element={<UpdatedPassword />} />
         </Route>
+        <Route path="/password/forgot" exact element={<ForgotPassword />} />
+        <Route
+          path="/password/reset/:token"
+          exact
+          element={<ResetPassword />}
+        />
 
         {/*  */}
         <Route path="/login" exact element={<LoginSignUp />} />
