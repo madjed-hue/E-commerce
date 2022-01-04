@@ -19,6 +19,7 @@ import UpdateProfile from "./component/user/UpdateProfile";
 import UpdatedPassword from "./component/user/UpdatedPassword";
 import ForgotPassword from "./component/user/ForgotPassword";
 import ResetPassword from "./component/user/ResetPassword";
+import Cart from "./component/Cart/Cart";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -54,6 +55,7 @@ function App() {
 
         {/*  */}
         <Route path="/login" exact element={<LoginSignUp />} />
+        <Route path="/cart" exact element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
