@@ -19,7 +19,9 @@ import UpdateProfile from "./component/user/UpdateProfile";
 import UpdatedPassword from "./component/user/UpdatedPassword";
 import ForgotPassword from "./component/user/ForgotPassword";
 import ResetPassword from "./component/user/ResetPassword";
+import Shipping from "./component/Cart/Shipping";
 import Cart from "./component/Cart/Cart";
+import ConfirmOrder from "./component/Cart/ConfirmOrder";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -41,10 +43,14 @@ function App() {
         <Route path="/products" exact element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" exact element={<Search />} />
+        <Route path="/login" exact element={<LoginSignUp />} />
+        <Route path="/cart" exact element={<Cart />} />
         <Route element={<ProtectedRoute />}>
           <Route exact path="/account" element={<Profile />} />
           <Route path="/me/update" exact element={<UpdateProfile />} />
           <Route path="/password/update" exact element={<UpdatedPassword />} />
+          <Route path="/login/shipping" exact element={<Shipping />} />
+          <Route path="/order/confirm" exact element={<ConfirmOrder />} />
         </Route>
         <Route path="/password/forgot" exact element={<ForgotPassword />} />
         <Route
@@ -52,10 +58,6 @@ function App() {
           exact
           element={<ResetPassword />}
         />
-
-        {/*  */}
-        <Route path="/login" exact element={<LoginSignUp />} />
-        <Route path="/cart" exact element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,0 +1,17 @@
+.MuiStepConnector-line {
+  display: none !important;
+}
+
+.MuiStepConnector-root {
+  height: 1px;
+  background-color: #00000059;
+}
+
+.MuiStepConnector-active,
+.MuiStepConnector-completed {
+  background-color: tomato;
+}
+.css-qivjh0-MuiStepLabel-label.Mui-completed,
+.css-qivjh0-MuiStepLabel-label.Mui-active {
+  color: #ffbf00 !important;
+}

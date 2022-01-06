@@ -94,6 +94,8 @@
 @media screen and (max-width: 768px) {
   .profileContainer {
     flex-direction: column;
+    height: 90vh;
+    top: 5%;
   }
 
   .profileContainer > div:first-child > h1 {
@@ -105,10 +107,16 @@
     font: 400 1.7vmax "Roboto";
     padding: 1vmax;
   }
+  .profileContainer > div:first-child > img {
+    width: 15vmax;
+    border-radius: 50%;
+    object-fit: contain;
+  }
 
   .profileContainer > div:last-child {
     text-align: center;
     align-items: center;
+    padding: 2vmax;
   }
 
   .profileContainer > div:last-child > div > h4 {
