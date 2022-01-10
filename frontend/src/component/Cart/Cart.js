@@ -88,7 +88,7 @@ const Cart = () => {
               <div className="cartGrossProfitBox">
                 <p>Gross Total</p>
                 <p>
-                  {`DZD ${cartItems.reduce(
+                  {`$${cartItems.reduce(
                     (accumilator, item) =>
                       accumilator + item.price * item.quantity,
                     0

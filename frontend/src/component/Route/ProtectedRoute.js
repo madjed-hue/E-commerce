@@ -6,29 +6,12 @@ const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
   return (
     <Fragment>
-      <>
-        {/* {!loading && !isAuthenticated ? (
-          <Navigate to="/login" />
-        ) : (
-          <Outlet {...rest} />
-        )} */}
-        {!loading && (
-          <Outlet
-            {...rest}
-            render={(props) => {
-              if (isAuthenticated === false) {
-                return <Navigate to="/login" />;
-              }
-
-              if (isAdmin === true && user.role !== "admin") {
-                return <Navigate to="/login" />;
-              }
-
-              return <Component {...props} />;
-            }}
-          />
-        )}
-      </>
+      {(loading === false && isAuthenticated === false) ||
+      (isAdmin === false && user.role !== "admin") ? (
+        <Navigate to="/login" />
+      ) : (
+        <Outlet {...rest} />
+      )}
     </Fragment>
   );
 };

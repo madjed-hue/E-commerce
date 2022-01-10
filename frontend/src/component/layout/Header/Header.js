@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 // import logo from "../../images/SE-removebg-preview.png";
-import logo1 from "../../../images/SAHOUANE_ENGINE-removebg-preview.png";
+import logo1 from "../../../images/My_Ecommerce.png";
 
 const Header = () => {
   return (

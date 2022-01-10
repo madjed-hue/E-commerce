@@ -96,6 +96,7 @@ const ProductDetails = () => {
     readOnly: true,
     precision: 0.5,
   };
+  console.log(product.stock);
 
   return (
     <Fragment>
@@ -130,7 +131,7 @@ const ProductDetails = () => {
                 </span>
               </div>
               <div className="detailsBlock-3">
-                <h1>{`${product.price} DA`}</h1>
+                <h1>{`$${product.price}`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
@@ -138,7 +139,7 @@ const ProductDetails = () => {
                     <button onClick={increaseQuantity}>+</button>
                   </div>
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product.stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -147,7 +148,7 @@ const ProductDetails = () => {
 
                 <p>
                   Status:
-                  <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
+                  <b className={product.stock < 1 ? "redColor" : "greenColor"}>
                     {product.Stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
                 </p>

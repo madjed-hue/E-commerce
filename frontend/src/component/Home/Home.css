@@ -117,7 +117,7 @@
   transform: translateY(-1vmax);
 }
 
-@media screen and (max-width: 678px) {
+@media screen and (max-width: 768px) {
   .productCard > p {
     font-size: 1.7vmax;
   }

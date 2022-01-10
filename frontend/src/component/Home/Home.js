@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import ProductCard from "./ProductCard";
-import MetatData from "../layout/MetaData";
+import MetaData from "../layout/MetaData";
 import { clearEroors, getProduct } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
@@ -25,24 +25,26 @@ const Home = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetatData title="Sahouane Engine" />
+          <MetaData title="ECOMMERCE" />
 
           <div className="banner">
-            <p>Welcome To Sahouane Engine Store</p>
-            <h1>Find Amamzing Product Bellow</h1>
+            <p>Welcome to Ecommerce</p>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+
             <a href="#container">
               <button>
                 Scroll <CgMouse />
               </button>
             </a>
           </div>
+
           <h2 className="homeHeading">Featured Products</h2>
 
           <div className="container" id="container">
             {products &&
-              products.map((product) => {
-                return <ProductCard product={product} key={product._id} />;
-              })}
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
           </div>
         </Fragment>
       )}

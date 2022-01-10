@@ -28,7 +28,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import MyOrders from "./component/Order/MyOrders";
-import OrderDetails from "./component/Order/OrderDetails.js";
+import OrderDetails from "./component/Order/OrderDetails";
+import Dashboard from "./component/admin/Dashboard";
+import ProductList from "./component/admin/ProductList";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -80,6 +82,18 @@ function App() {
           <Route exact path="/success" element={<OrderSuccess />} />
           <Route exact path="/orders" element={<MyOrders />} />
           <Route exact path="/order/:id" element={<OrderDetails />} />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            isAdmin={true}
+            exact
+            path="/admin/products"
+            element={<ProductList />}
+          />
         </Route>
         <Route path="/password/forgot" exact element={<ForgotPassword />} />
         <Route
