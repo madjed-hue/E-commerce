@@ -24,7 +24,7 @@ router
 
 // Create Product Route
 router
-  .route("/admin/products/new")
+  .route("/admin/product/new")
   .post(isAuthenticatedUser, authorizeRoles("admin"), createPoduct);
 
 //Update Delete and get Details Product
