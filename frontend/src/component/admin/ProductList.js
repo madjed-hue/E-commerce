@@ -25,9 +25,9 @@ const ProductList = () => {
 
   const { error, products } = useSelector((state) => state.products);
 
-  //   const { error: deleteError, isDeleted } = useSelector(
-  //     (state) => state.product
-  //   );
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
 
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
@@ -39,19 +39,19 @@ const ProductList = () => {
       dispatch(clearEroors());
     }
 
-    // if (deleteError) {
-    //   alert.error(deleteError);
-    //   dispatch(clearEroors());
-    // }
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearEroors());
+    }
 
-    // if (isDeleted) {
-    //   alert.success("Product Deleted Successfully");
-    //   navigate("/admin/dashboard");
-    //   dispatch({ type: DELETE_PRODUCT_RESET });
-    // }
+    if (isDeleted) {
+      alert.success("Product Deleted Successfully");
+      navigate("/admin/dashboard");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
 
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error, navigate]);
+  }, [dispatch, alert, error, navigate, deleteError, isDeleted]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -86,17 +86,15 @@ const ProductList = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
+        const id = params.getValue(params.id);
+
         return (
           <Fragment>
-            <Link to={`/admin/product/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/product/${id}`}>
               <EditIcon />
             </Link>
 
-            <Button
-              onClick={() =>
-                deleteProductHandler(params.getValue(params.id, "id"))
-              }
-            >
+            <Button onClick={() => deleteProductHandler(id)}>
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -129,6 +127,7 @@ const ProductList = () => {
           <DataGrid
             rows={rows}
             columns={columns}
+            rowsPerPageOptions={[5, 10, 20]}
             pageSize={10}
             disableSelectionOnClick
             className="productListTable"

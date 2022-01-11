@@ -29,7 +29,7 @@ router
 
 //Update Delete and get Details Product
 router
-  .route("/admin/products/:id")
+  .route("/admin/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
 

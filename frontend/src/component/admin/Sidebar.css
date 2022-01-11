@@ -16,23 +16,31 @@
 .sidebar > a > img:hover {
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
 }
-.sidebar a {
+.sidebar .anchor {
+  margin-left: 0;
+  font-size: inherit;
+}
+.sidebar a,
+.sidebar .anchor {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.493);
   font: 200 1rem "Roboto";
   padding: 2rem;
   transition: all 0.5s;
 }
-.sidebar a:hover {
+.sidebar a:hover,
+.sidebar .anchor:hover {
   color: #ffbd59;
   transform: scale(1.1);
 }
 
-.sidebar a > P {
+.sidebar a > P,
+.sidebar .anchor > p {
   display: flex;
   align-items: center;
 }
-.sidebar a > p > svg {
+.sidebar a > p > svg,
+.sidebar .anchor > p > svg {
   margin-right: 0.5rem;
 }
 
