@@ -96,6 +96,7 @@ function App() {
             path="/admin/products"
             element={<ProductList />}
           />
+
           <Route
             isAdmin={true}
             exact
@@ -104,8 +105,8 @@ function App() {
           />
           <Route
             isAdmin={true}
-            exact
             path="/admin/product/:id"
+            exact
             element={<UpdateProduct />}
           />
         </Route>

@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-
+import {
+  clearEroors,
+  updateProduct,
+  getAdminProductDetails,
+} from "../../actions/productAction";
 import { useAlert } from "react-alert";
 import Button from "@mui/material/Button";
 import MetaData from "../layout/MetaData";
@@ -11,11 +14,6 @@ import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Sidebar from "./Sidebar";
-import {
-  clearEroors,
-  getProductDetails,
-  updateProduct,
-} from "../../actions/productAction";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -25,7 +23,6 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
 
   const { error, product } = useSelector((state) => state.productDetails);
-  console.log(product);
 
   const {
     loading,
@@ -43,30 +40,32 @@ const UpdateProduct = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Bed",
-    "Bed Room",
-    "Clothes",
-    "Electronics",
-    "Kitchen",
     "Laptop",
-    "Phones",
+    "Footwear",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
   ];
 
   const productId = useParams();
+  // console.log(getProductDetails(productId));
 
   useEffect(() => {
+    if (!product) return;
     if (product && product._id !== productId) {
-      dispatch(getProductDetails(productId));
+      dispatch(getAdminProductDetails(productId));
+      console.log(product);
     } else {
-      // console.log(productId);
-      // console.log(product);
-      setName(product.name);
-      setDescription(product.description);
-      setPrice(product.price);
-      setCategory(product.category);
-      setStock(product.stock);
-      setOldImages(product.images);
+      // setName(product.name);
+      // setDescription(product.description);
+      // setPrice(product.price);
+      // setCategory(product.category);
+      // setStock(product.stock);
+      // setOldImages(product.images);
     }
+    console.log(window.location.href);
     if (error) {
       alert.error(error);
       dispatch(clearEroors());
@@ -132,7 +131,7 @@ const UpdateProduct = () => {
   };
   return (
     <Fragment>
-      <MetaData title="Create Product" />
+      <MetaData title="Update Product" />
       <div className="dashboard">
         <Sidebar />
         <div className="newProductContainer">
@@ -141,7 +140,7 @@ const UpdateProduct = () => {
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
 
             <div>
               <SpellcheckIcon />

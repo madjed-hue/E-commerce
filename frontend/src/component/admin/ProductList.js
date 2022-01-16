@@ -86,15 +86,14 @@ const ProductList = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        const id = params.getValue(params.id);
-
+        let id = params.row.id;
         return (
           <Fragment>
             <Link to={`/admin/product/${id}`}>
               <EditIcon />
             </Link>
 
-            <Button onClick={() => deleteProductHandler(id)}>
+            <Button onClick={() => deleteProductHandler(params.row.id)}>
               <DeleteIcon />
             </Button>
           </Fragment>

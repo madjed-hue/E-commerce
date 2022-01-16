@@ -9,10 +9,6 @@ import {
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_RESET,
   NEW_PRODUCT_FAIL,
-  UPDATE_PRODUCT_REQUEST,
-  UPDATE_PRODUCT_SUCCESS,
-  UPDATE_PRODUCT_FAIL,
-  UPDATE_PRODUCT_RESET,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL,
@@ -25,6 +21,10 @@ import {
   NEW_REVIEW_FAIL,
   NEW_REVIEW_RESET,
   CLEAR_ERRORS,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
+  UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_RESET,
 } from "../constants/productConstants";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -163,6 +163,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
         loading: false,
         error: action.payload,
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
