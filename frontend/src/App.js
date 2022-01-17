@@ -33,8 +33,9 @@ import Dashboard from "./component/admin/Dashboard";
 import ProductList from "./component/admin/ProductList";
 import NewProduct from "./component/admin/NewProduct";
 import UpdateProduct from "./component/admin/UpdateProduct";
+import OrderList from "./component/admin/OrderList";
 
-function App() {
+function App(id) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -52,6 +53,7 @@ function App() {
     store.dispatch(loadUser());
     getStripeApikey();
   }, []);
+
   return (
     <BrowserRouter>
       <Header />
@@ -107,7 +109,13 @@ function App() {
             isAdmin={true}
             path="/admin/product/:id"
             exact
-            element={<UpdateProduct />}
+            element={<UpdateProduct id={id} />}
+          />
+          <Route
+            isAdmin={true}
+            path="/admin/orders"
+            exact
+            element={<OrderList />}
           />
         </Route>
         <Route path="/password/forgot" exact element={<ForgotPassword />} />
@@ -117,6 +125,7 @@ function App() {
           element={<ResetPassword />}
         />
       </Routes>
+
       <Footer />
     </BrowserRouter>
   );

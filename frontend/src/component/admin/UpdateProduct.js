@@ -15,7 +15,7 @@ import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Sidebar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
@@ -40,17 +40,20 @@ const UpdateProduct = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
+    "Bed",
+    "Bed Room",
+    "Clothes",
+    "Electronics",
+    "Kitchen",
     "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "Phones",
   ];
 
+  const location = useLocation();
+  const from = location.state;
+  console.log(from);
+
   const productId = useParams();
-  // console.log(getProductDetails(productId));
 
   useEffect(() => {
     if (!product) return;
@@ -65,7 +68,7 @@ const UpdateProduct = () => {
       // setStock(product.stock);
       // setOldImages(product.images);
     }
-    console.log(window.location.href);
+
     if (error) {
       alert.error(error);
       dispatch(clearEroors());
@@ -229,7 +232,7 @@ const UpdateProduct = () => {
               type="submit"
               disabled={loading ? true : false}
             >
-              Create
+              Update
             </Button>
           </form>
         </div>

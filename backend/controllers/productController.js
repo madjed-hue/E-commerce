@@ -82,7 +82,8 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 // Update Product -- Admin
 
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
-  let product = await Product.findById(req.params.id);
+  const id = JSON.stringify(req.params.id);
+  let product = await Product.findById(id);
 
   if (!product) {
     return next(new ErrorHundeler("Product not found", 404));
@@ -119,12 +120,13 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
     req.body.images = imagesLinks;
   }
 
-  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-
+  product = await Product.findById(req.params.id);
+  product.name = req.body.name;
+  product.description = req.body.description;
+  product.price = req.body.price;
+  product.category = req.body.category;
+  product.stock = req.body.stock;
+  await product.save();
   res.status(200).json({
     success: true,
     product,

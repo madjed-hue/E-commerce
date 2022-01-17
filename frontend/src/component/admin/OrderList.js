@@ -3,10 +3,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import "./ProductList.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  clearEroors,
-  deleteProduct,
-  getAdminProduct,
-} from "../../actions/productAction";
+  clearErrors,
+  deleteOrder,
+  getAllOrders,
+} from "../../actions/orderAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import Button from "@mui/material/Button";
@@ -14,68 +14,67 @@ import MetaData from "../layout/MetaData";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "./Sidebar";
-import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
+import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
-const ProductList = () => {
+const OrderList = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const alert = useAlert();
+  const { error, orders } = useSelector((state) => state.allOrders);
 
-  const { error, products } = useSelector((state) => state.products);
+  const { error: deleteError, isDeleted } = useSelector((state) => state.order);
 
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.product
-  );
-
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
-  };
-  const updateProductHandler = (id) => {
-    navigate(`/admin/product/${id}`);
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
 
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(clearEroors());
+      dispatch(clearErrors());
     }
 
     if (deleteError) {
       alert.error(deleteError);
-      dispatch(clearEroors());
+      dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Product Deleted Successfully");
-      navigate("/admin/dashboard");
-      dispatch({ type: DELETE_PRODUCT_RESET });
+      alert.success("Order Deleted Successfully");
+      navigate("/admin/orders");
+      dispatch({ type: DELETE_ORDER_RESET });
     }
 
-    dispatch(getAdminProduct());
-  }, [dispatch, alert, error, navigate, deleteError, isDeleted]);
+    dispatch(getAllOrders());
+  }, [dispatch, alert, error, deleteError, isDeleted, navigate]);
 
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
+    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
 
     {
-      field: "name",
-      headerName: "Name",
-      minWidth: 350,
-      flex: 1,
+      field: "status",
+      headerName: "Status",
+      minWidth: 150,
+      flex: 0.5,
+      cellClassName: (params) => {
+        return params.getValue(params.id, "status") === "Delivered"
+          ? "greenColor"
+          : "redColor";
+      },
     },
     {
-      field: "stock",
-      headerName: "Stock",
+      field: "itemsQty",
+      headerName: "Items Qty",
       type: "number",
       minWidth: 150,
-      flex: 0.3,
+      flex: 0.4,
     },
 
     {
-      field: "price",
-      headerName: "Price",
+      field: "amount",
+      headerName: "Amount",
       type: "number",
       minWidth: 270,
       flex: 0.5,
@@ -89,17 +88,17 @@ const ProductList = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        // let id = params.row;
-        let id = params.getValue(params.id, "id");
         return (
           <Fragment>
-            <Link to={`/admin/product/${id}`}>
-              {/* <span onClick={() => updateProductHandler(JSON.parseInt(id))}> */}
+            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
               <EditIcon />
-              {/* </span> */}
             </Link>
 
-            <Button onClick={() => deleteProductHandler(params.row.id)}>
+            <Button
+              onClick={() =>
+                deleteOrderHandler(params.getValue(params.id, "id"))
+              }
+            >
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -107,32 +106,29 @@ const ProductList = () => {
       },
     },
   ];
-
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  orders &&
+    orders.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.stock,
-        price: item.price,
-        name: item.name,
+        itemsQty: item.orderItems.length,
+        amount: item.totalPrice,
+        status: item.orderStatus,
       });
     });
-
   return (
     <Fragment>
-      <MetaData title={`ALL PRODUCTS - Admin`} />
+      <MetaData title={`ALL ORDERS - Admin`} />
 
       <div className="dashboard">
         <Sidebar />
         <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
+          <h1 id="productListHeading">ALL ORDERS</h1>
 
           <DataGrid
             rows={rows}
             columns={columns}
-            rowsPerPageOptions={[5, 10, 20]}
             pageSize={10}
             disableSelectionOnClick
             className="productListTable"
@@ -144,4 +140,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default OrderList;
