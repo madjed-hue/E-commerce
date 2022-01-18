@@ -62,5 +62,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.1.105:4000"
+  "proxy": {
+    "/auth/google": {
+      "target": "localhost:4000"
+    }
+  }
 }

@@ -48,8 +48,9 @@ const UpdateProduct = () => {
     "Laptop",
     "Phones",
   ];
+  console.log(product);
 
-  const { productId } = useParams();
+  const productId = useParams();
 
   useEffect(() => {
     if (product && product._id !== productId) {

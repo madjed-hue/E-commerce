@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
 import {
@@ -17,12 +17,13 @@ import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import "./processOrder.css";
 
 const ProcessOrder = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
+
+  console.log(order);
   const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
 
