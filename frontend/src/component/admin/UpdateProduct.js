@@ -15,7 +15,7 @@ import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Sidebar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
@@ -49,14 +49,9 @@ const UpdateProduct = () => {
     "Phones",
   ];
 
-  const location = useLocation();
-  const from = location.state;
-  console.log(from);
-
-  const productId = useParams();
+  const { productId } = useParams();
 
   useEffect(() => {
-    if (!product) return;
     if (product && product._id !== productId) {
       dispatch(getAdminProductDetails(productId));
       console.log(product);

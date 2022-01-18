@@ -32,9 +32,6 @@ const ProductList = () => {
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
   };
-  const updateProductHandler = (id) => {
-    navigate(`/admin/product/${id}`);
-  };
 
   useEffect(() => {
     if (error) {
@@ -55,6 +52,18 @@ const ProductList = () => {
 
     dispatch(getAdminProduct());
   }, [dispatch, alert, error, navigate, deleteError, isDeleted]);
+
+  const rows = [];
+
+  products &&
+    products.forEach((item) => {
+      rows.push({
+        id: item._id,
+        stock: item.stock,
+        price: item.price,
+        name: item.name,
+      });
+    });
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -90,13 +99,11 @@ const ProductList = () => {
       sortable: false,
       renderCell: (params) => {
         // let id = params.row;
-        let id = params.getValue(params.id, "id");
+        let id = params.row.id;
         return (
           <Fragment>
             <Link to={`/admin/product/${id}`}>
-              {/* <span onClick={() => updateProductHandler(JSON.parseInt(id))}> */}
               <EditIcon />
-              {/* </span> */}
             </Link>
 
             <Button onClick={() => deleteProductHandler(params.row.id)}>
@@ -107,18 +114,6 @@ const ProductList = () => {
       },
     },
   ];
-
-  const rows = [];
-
-  products &&
-    products.forEach((item) => {
-      rows.push({
-        id: item._id,
-        stock: item.stock,
-        price: item.price,
-        name: item.name,
-      });
-    });
 
   return (
     <Fragment>

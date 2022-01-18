@@ -34,6 +34,7 @@ import ProductList from "./component/admin/ProductList";
 import NewProduct from "./component/admin/NewProduct";
 import UpdateProduct from "./component/admin/UpdateProduct";
 import OrderList from "./component/admin/OrderList";
+import ProcessOrder from "./component/admin/ProcessOrder";
 
 function App(id) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -116,6 +117,12 @@ function App(id) {
             path="/admin/orders"
             exact
             element={<OrderList />}
+          />
+          <Route
+            isAdmin={true}
+            path="/admin/order/:id"
+            exact
+            element={<ProcessOrder />}
           />
         </Route>
         <Route path="/password/forgot" exact element={<ForgotPassword />} />

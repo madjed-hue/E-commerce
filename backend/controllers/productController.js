@@ -3,7 +3,6 @@ const ErrorHundeler = require("../utils/errorHundeler");
 const catchAsyncError = require("../middlewear/catchAsyncError");
 const ApiFeatures = require("../utils/apiFeatures");
 const cloudinary = require("cloudinary");
-const { json } = require("body-parser");
 
 // Create Product -- Admin
 exports.createPoduct = catchAsyncError(async (req, res, next) => {
@@ -82,8 +81,7 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 // Update Product -- Admin
 
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
-  const id = JSON.stringify(req.params.id);
-  let product = await Product.findById(id);
+  let product = await Product.findById(req.params.id);
 
   if (!product) {
     return next(new ErrorHundeler("Product not found", 404));
