@@ -9,6 +9,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+body {
+  cursor: url("./images/cursor.png"), auto;
+}
+
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;

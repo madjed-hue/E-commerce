@@ -4,7 +4,7 @@ import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, updatePassword } from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -14,7 +14,6 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 const UpdatedPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const location = useLocation();
   const navigate = useNavigate();
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
   const [oldPassword, setOldPassword] = useState("");

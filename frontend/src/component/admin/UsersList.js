@@ -20,8 +20,6 @@ const UsersList = () => {
 
   const { error, users } = useSelector((state) => state.allUsers);
 
-  console.log(users);
-
   const {
     error: deleteError,
     isDeleted,

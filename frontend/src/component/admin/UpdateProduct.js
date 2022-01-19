@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   clearEroors,
   updateProduct,
-  getAdminProductDetails,
+  getProductDetails,
 } from "../../actions/productAction";
 import { useAlert } from "react-alert";
 import Button from "@mui/material/Button";
@@ -48,21 +48,20 @@ const UpdateProduct = () => {
     "Laptop",
     "Phones",
   ];
-  console.log(product);
 
-  const productId = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    if (product && product._id !== productId) {
-      dispatch(getAdminProductDetails(productId));
+    if (product && product._id !== id) {
+      dispatch(getProductDetails(id));
       console.log(product);
     } else {
-      // setName(product.name);
-      // setDescription(product.description);
-      // setPrice(product.price);
-      // setCategory(product.category);
-      // setStock(product.stock);
-      // setOldImages(product.images);
+      setName(product.name);
+      setDescription(product.description);
+      setPrice(product.price);
+      setCategory(product.category);
+      setStock(product.stock);
+      setOldImages(product.images);
     }
 
     if (error) {
@@ -80,16 +79,7 @@ const UpdateProduct = () => {
       navigate("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
-  }, [
-    dispatch,
-    alert,
-    error,
-    isUpdated,
-    productId,
-    product,
-    updateError,
-    navigate,
-  ]);
+  }, [dispatch, alert, error, isUpdated, product, updateError, navigate, id]);
 
   const updateProductSubmitHandler = (e) => {
     e.preventDefault();
@@ -105,7 +95,7 @@ const UpdateProduct = () => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    dispatch(updateProduct(productId, myForm));
+    dispatch(updateProduct(id, myForm));
   };
 
   const updateProductImagesChange = (e) => {

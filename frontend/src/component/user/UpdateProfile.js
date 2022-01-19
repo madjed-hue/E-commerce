@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, loadUser, updateProfile } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FaceIcon from "@mui/icons-material/Face";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
@@ -13,7 +13,6 @@ import MetaData from "../layout/MetaData";
 const UpdateProfile = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const location = useLocation();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);

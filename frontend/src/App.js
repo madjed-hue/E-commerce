@@ -37,6 +37,10 @@ import OrderList from "./component/admin/OrderList";
 import ProcessOrder from "./component/admin/ProcessOrder";
 import UsersList from "./component/admin/UsersList";
 import UpdateUser from "./component/admin/UpdateUser";
+import ProductReviews from "./component/admin/ProductReviews";
+import About from "./component/layout/About/About";
+import Contact from "./component/layout/Contact/Contact";
+import NotFound from "./component/layout/Not Found/NotFound";
 
 function App(id) {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -57,10 +61,13 @@ function App(id) {
     getStripeApikey();
   }, []);
 
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
+
   return (
     <BrowserRouter>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
+
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/product/:id" exact element={<ProductDetails />} />
@@ -138,6 +145,12 @@ function App(id) {
             exact
             element={<UpdateUser />}
           />
+          <Route
+            isAdmin={true}
+            path="/admin/reviews"
+            exact
+            element={<ProductReviews />}
+          />
         </Route>
         <Route path="/password/forgot" exact element={<ForgotPassword />} />
         <Route
@@ -145,6 +158,9 @@ function App(id) {
           exact
           element={<ResetPassword />}
         />
+        <Route path="/about" exact element={<About />} />
+        <Route path="/contact" exact element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />

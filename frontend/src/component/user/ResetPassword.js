@@ -4,7 +4,7 @@ import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, resetPassword } from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
@@ -12,7 +12,6 @@ import LockIcon from "@mui/icons-material/Lock";
 const ResetPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const location = useLocation();
   const navigate = useNavigate();
   const { token } = useParams();
   const { error, success, loading } = useSelector(

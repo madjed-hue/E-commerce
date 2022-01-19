@@ -167,7 +167,7 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 
 //Update User Profile
 exports.updateProfile = catchAsyncError(async (req, res, next) => {
-  let user;
+  let user = await User.findById(req.user.id);
   try {
     user = await User.findById(req.user.id);
     user.name = req.body.name;
@@ -248,6 +248,9 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
       new ErrorHundeler(`user doesn't exist with Id : ${req.params.id}`, 400)
     );
   }
+  const imageId = user.avatar.public_id;
+
+  await cloudinary.v2.uploader.destroy(imageId);
 
   await user.remove();
 
