@@ -6,8 +6,6 @@ Hi! My name is **BEDDIAF FATEH**, I have created this app with MERN Stack for fr
 
 1.  Must have basic knowledge of **Node**, **React**, **Express**, **MongoDB** .
 
-# [](https://github.com/meabhisingh/mernProjectEcommerce/blob/master/README.md#install-depend
-
 # Install Dependencies
 
 **For Backend** - `npm i`
