@@ -54,7 +54,6 @@ const UpdateProduct = () => {
   useEffect(() => {
     if (product && product._id !== id) {
       dispatch(getProductDetails(id));
-      console.log(product);
     } else {
       setName(product.name);
       setDescription(product.description);
